@@ -8,11 +8,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const taskList = document.querySelector("#tasks");
 
-  submitButton.addEventListener("click", function () {
+  submitButton.addEventListener("click", function (event) {
+    event.preventDefault();
     // adds the input to the array(toDos) when the submit button is clicked.
     toDos.push(input.value);
     const li = document.createElement("li");
     li.innerText = input.value;
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "X";
+    deleteButton.addEventListener("click", () => {
+      const index = toDos.indexOf(input.value)
+      toDos.splice(index,1)
+     })
+    li.appendChild(deleteButton)
     taskList.appendChild(li);
+    input.value = ""
   });
 });
